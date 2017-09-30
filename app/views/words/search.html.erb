@@ -1,0 +1,30 @@
+<h1>Search</h1>
+
+<%= form_tag do %>
+  <%= text_field_tag :word, params[:word] %>
+  <%= submit_tag %>
+<% end %>
+
+<!-- <%= debug @words %> -->
+
+<% if @words_identical %>
+  <br />
+  Twoje słowo to:
+  <%= render partial: "word", locals: {word: @words_identical} %>
+  <br />
+  <br />
+  Inne słowa, które mogą Cię zainteresować:
+
+<% end %>
+
+<ul>
+  <% @words.each do |word| %>
+    <li>
+      <%= render partial: "word", locals: {word: word} %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @words.count == 0 %>
+  Nie mamy Twojego słowa w bazie. Wkrótce ją uzupełnimy.
+<% end %>
